@@ -16,7 +16,11 @@
 
 set -xe
 
+DEV_PATH="/home/osh/vancouver-workshop"
+OSH_PATH="/home/osh/vancouver-workshop/openstack-helm"
+
 #NOTE: Lint and package chart
+cd $OSH_PATH
 for CHART in ceph-mon ceph-osd ceph-client; do
   make "${CHART}"
 done
@@ -162,6 +166,7 @@ pod:
 EOF
 
 for CHART in ceph-mon ceph-osd ceph-client; do
+  cd $OSH_PATH
   helm upgrade --install ${CHART} ./${CHART} \
     --namespace=ceph \
     --values=/tmp/ceph.yaml \
@@ -169,7 +174,8 @@ for CHART in ceph-mon ceph-osd ceph-client; do
     ${OSH_EXTRA_HELM_ARGS_CEPH_DEPLOY}
 
   #NOTE: Wait for deploy
-  ./tools/deployment/common/wait-for-pods.sh ceph
+  cd $DEV_PATH/90-common
+  ./wait-for-pods.sh ceph
 
   #NOTE: Validate deploy
   MON_POD=$(kubectl get pods \

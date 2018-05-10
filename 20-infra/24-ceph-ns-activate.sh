@@ -16,7 +16,11 @@
 
 set -xe
 
+DEV_PATH="/home/osh/vancouver-workshop"
+OSH_PATH="/home/osh/vancouver-workshop/openstack-helm"
+
 #NOTE: Lint and package chart
+cd $OSH_PATH
 make ceph-client
 
 #NOTE: Deploy command
@@ -52,7 +56,8 @@ helm upgrade --install ceph-openstack-config ./ceph-client \
   ${OSH_EXTRA_HELM_ARGS_CEPH_NS_ACTIVATE}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+cd $DEV_PATH/90-common
+./wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 kubectl get -n openstack jobs --show-all

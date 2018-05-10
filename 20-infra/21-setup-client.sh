@@ -35,4 +35,5 @@ clouds:
 EOF
 
 #NOTE: Build charts
+cd ~/vancouver-workshop/openstack-helm
 make all
