@@ -28,6 +28,11 @@ Minimum Hardware (VM) Requirements
 
     $ ./10-kubernetes/12-deploy-k8s.sh
 
+### Download openstack-helm & openstack-helm-infra source
+
+    $ git clone https://github.com/openstack/openstack-helm.git
+    $ git clone https://github.com/openstack/openstack-helm-infra.git
+
 ### Deploy infra components for OpenStack
     $ ./20-infra/21-setup-client.sh
     $ ./20-infra/22-ingress.sh
