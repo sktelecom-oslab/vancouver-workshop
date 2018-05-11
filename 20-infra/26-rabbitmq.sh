@@ -24,6 +24,7 @@ set -xe
 helm upgrade --install rabbitmq ~/vancouver-workshop/openstack-helm/rabbitmq \
     --namespace=openstack \
     --set pod.replicas.server=1 \
+    --set monitoring.prometheus.enabled=true \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_RABBITMQ}
 
