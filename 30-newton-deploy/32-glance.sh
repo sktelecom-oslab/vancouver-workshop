@@ -17,20 +17,20 @@
 set -xe
 
 #NOTE: Lint and package chart
-make glance
+# make glance
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
 #NOTE(portdirect), this could be: radosgw, rbd, swift or pvc
 : ${GLANCE_BACKEND:="radosgw"}
-helm upgrade --install glance ./glance \
+helm upgrade --install glance ~/vancouver-workshop/openstack-helm/glance \
   --namespace=openstack \
   --set storage=${GLANCE_BACKEND} \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_GLANCE}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status glance

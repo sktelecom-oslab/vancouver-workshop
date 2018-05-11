@@ -16,7 +16,7 @@
 set -xe
 
 #NOTE: Lint and package chart
-make cinder
+#make cinder
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
@@ -33,14 +33,14 @@ conf:
         crush_rule: same_host
         chunk_size: 8
 EOF
-helm upgrade --install cinder ./cinder \
+helm upgrade --install cinder ~/vancouver-workshop/openstack-helm/cinder \
   --namespace=openstack \
   --values=/tmp/cinder.yaml \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_CINDER}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 export OS_CLOUD=openstack_helm

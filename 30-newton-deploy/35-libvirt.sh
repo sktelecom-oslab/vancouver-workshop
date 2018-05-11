@@ -16,17 +16,17 @@
 set -xe
 
 #NOTE: Lint and package chart
-make libvirt
+#make libvirt
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install libvirt ./libvirt \
+helm upgrade --install libvirt ~/vancouver-workshop/openstack-helm/libvirt \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_LIBVIRT}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status libvirt

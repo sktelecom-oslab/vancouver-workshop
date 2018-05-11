@@ -16,17 +16,17 @@
 set -xe
 
 #NOTE: Lint and package chart
-make heat
+#make heat
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install heat ./heat \
+helm upgrade --install heat ~/vancouver-workshop/openstack-helm/heat \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_HEAT}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 export OS_CLOUD=openstack_helm

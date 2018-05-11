@@ -16,17 +16,17 @@
 set -xe
 
 #NOTE: Lint and package chart
-make openvswitch
+# make openvswitch
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install openvswitch ./openvswitch \
+helm upgrade --install openvswitch ~/vancouver-workshop/openstack-helm/openvswitch \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_OPENVSWITCH}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstac
 
 #NOTE: Validate Deployment info
 helm status openvswitch

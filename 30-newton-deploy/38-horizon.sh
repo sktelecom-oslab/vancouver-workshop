@@ -17,11 +17,11 @@
 set -xe
 
 #NOTE: Lint and package chart
-make horizon
+#make horizon
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install horizon ./horizon \
+helm upgrade --install horizon ~/vancouver-workshop/openstack-helm/horizon \
     --namespace=openstack \
     --set network.node_port.enabled=true \
     --set network.node_port.port=31000 \
@@ -29,7 +29,7 @@ helm upgrade --install horizon ./horizon \
     ${OSH_EXTRA_HELM_ARGS_HORIZON}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status horizon

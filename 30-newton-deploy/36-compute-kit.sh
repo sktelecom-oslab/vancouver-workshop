@@ -16,20 +16,20 @@
 set -xe
 
 #NOTE: Lint and package chart
-make nova
-make neutron
+# make nova
+# make neutron
 
 #NOTE: Deploy nova
 : ${OSH_EXTRA_HELM_ARGS:=""}
 if [ "x$(systemd-detect-virt)" == "xnone" ]; then
   echo 'OSH is not being deployed in virtualized environment'
-  helm upgrade --install nova ./nova \
+  helm upgrade --install nova ~/vancouver-workshop/openstack-helm/nova \
       --namespace=openstack \
       ${OSH_EXTRA_HELM_ARGS} \
       ${OSH_EXTRA_HELM_ARGS_NOVA}
 else
   echo 'OSH is being deployed in virtualized environment, using qemu for nova'
-  helm upgrade --install nova ./nova \
+  helm upgrade --install nova ~/vancouver-workshop/openstack-helm/nova \
       --namespace=openstack \
       --set conf.nova.libvirt.virt_type=qemu \
       ${OSH_EXTRA_HELM_ARGS} \
@@ -64,14 +64,14 @@ conf:
       linux_bridge:
         bridge_mappings: public:br-ex
 EOF
-helm upgrade --install neutron ./neutron \
+helm upgrade --install neutron ~/vancouver-workshop/openstack-helm/neutron \
     --namespace=openstack \
     --values=/tmp/neutron.yaml \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_NEUTRON}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 export OS_CLOUD=openstack_helm

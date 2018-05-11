@@ -17,17 +17,17 @@
 set -xe
 
 #NOTE: Lint and package chart
-make keystone
+# make keystone
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install keystone ./keystone \
+helm upgrade --install keystone ~/vancouver-workshop/openstack-helm/keystone \
     --namespace=openstack \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_KEYSTONE}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status keystone
