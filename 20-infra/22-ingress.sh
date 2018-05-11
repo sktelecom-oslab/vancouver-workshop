@@ -16,13 +16,8 @@
 
 set -xe
 
-DEV_PATH="/home/osh/vancouver-workshop"
-OSH_PATH="/home/osh/vancouver-workshop/openstack-helm"
-
-
-#NOTE: Lint and package chart
-cd $OSH_PATH
-make ingress
+# NOTE: Lint and package chart
+# make ingress
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
@@ -34,22 +29,21 @@ network:
   host_namespace: true
 EOF
 
-helm upgrade --install ingress-kube-system $OSH_PATH/ingress \
+helm upgrade --install ingress-kube-system ~/vancouver-workshop/openstack-helm/ingress \
   --namespace=kube-system \
   --values=/tmp/ingress-kube-system.yaml \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_INGRESS_KUBE_SYSTEM}
 
 #NOTE: Deploy namespace ingress
-helm upgrade --install ingress-openstack $OSH_PATH/ingress \
+helm upgrade --install ingress-openstack ~/vancouver-workshop/openstack-helm/ingress \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_INGRESS_OPENSTACK}
 
 #NOTE: Wait for deploy
-cd $DEV_PATH/90-common
-./wait-for-pods.sh kube-system
-./wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh kube-system
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Display info
 helm status ingress-kube-system
