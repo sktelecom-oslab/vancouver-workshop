@@ -17,7 +17,7 @@
 set -xe
 
 #NOTE: Lint and package chart
-make ceph
+# make ceph
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
@@ -45,14 +45,14 @@ conf:
   rgw_ks:
     enabled: true
 EOF
-helm upgrade --install radosgw-openstack ./ceph-client \
+helm upgrade --install radosgw-openstack ~/vancouver-workshop/openstack-helm/ceph-client \
   --namespace=openstack \
   --values=/tmp/radosgw-openstack.yaml \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_CEPH_RGW}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status radosgw-openstack

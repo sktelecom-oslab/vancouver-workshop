@@ -17,18 +17,18 @@
 set -xe
 
 #NOTE: Lint and package chart
-make mariadb
+# make mariadb
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install mariadb ./mariadb \
+helm upgrade --install mariadb ~/vancouver-workshop/openstack-helm/mariadb \
     --namespace=openstack \
     --set pod.replicas.server=1 \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_MARIADB}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status mariadb

@@ -16,12 +16,8 @@
 
 set -xe
 
-DEV_PATH="/home/osh/vancouver-workshop"
-OSH_PATH="/home/osh/vancouver-workshop/openstack-helm"
-
 #NOTE: Lint and package chart
-cd $OSH_PATH
-make ceph-client
+#make ceph-client
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
@@ -49,15 +45,14 @@ conf:
   rgw_ks:
     enabled: true
 EOF
-helm upgrade --install ceph-openstack-config ./ceph-client \
+helm upgrade --install ceph-openstack-config ~/vancouver-workshop/openstack-helm/ceph-client \
   --namespace=openstack \
   --values=/tmp/ceph-openstack-config.yaml \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_CEPH_NS_ACTIVATE}
 
 #NOTE: Wait for deploy
-cd $DEV_PATH/90-common
-./wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 kubectl get -n openstack jobs --show-all

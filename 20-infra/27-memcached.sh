@@ -17,17 +17,17 @@
 set -xe
 
 #NOTE: Lint and package chart
-make memcached
+# make memcached
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install memcached ./memcached \
+helm upgrade --install memcached ~/vancouver-workshop/openstack-helm/memcached \
     --namespace=openstack \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_MEMCACHED}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status memcached

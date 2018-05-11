@@ -17,18 +17,18 @@
 set -xe
 
 #NOTE: Lint and package chart
-make rabbitmq
+# make rabbitmq
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install rabbitmq ./rabbitmq \
+helm upgrade --install rabbitmq ~/vancouver-workshop/openstack-helm/rabbitmq \
     --namespace=openstack \
     --set pod.replicas.server=1 \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_RABBITMQ}
 
 #NOTE: Wait for deploy
-./tools/deployment/common/wait-for-pods.sh openstack
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status rabbitmq
