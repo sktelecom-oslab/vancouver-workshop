@@ -17,8 +17,8 @@
 set -xe
 
 CURRENT_DIR="$(pwd)"
-: ${OSH_INFRA_PATH:="~/vancouver-workshop/openstack-helm-infra"}
-cd ${OSH_INFRA_PATH}
+OSH_INFRA_PATH=~/vancouver-workshop/openstack-helm-infra
+cd $OSH_INFRA_PATH
 make dev-deploy setup-host
 make dev-deploy k8s
 cd ${CURRENT_DIR}
