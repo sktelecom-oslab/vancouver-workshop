@@ -14,24 +14,17 @@ Minimum Hardware (VM) Requirements
 
 ## Quick Start Guide
 
-### Download Installation Scripts
-
+### Download Installation Scripts, openstack-helm & openstack-helm-infra source
     $ git clone https://github.com/sktelecom-oslab/vancouver-workshop.git
     $ cd vancouver-workshop
-
+    $ git clone https://github.com/openstack/openstack-helm.git
+    $ git clone https://github.com/openstack/openstack-helm-infra.git
 
 ### Initialize environment and install all related packages using
-
     $ ./10-kubernetes/11-install-packages.sh
 
 ### Deploy kubernetes cluster at your single machine
-
     $ ./10-kubernetes/12-deploy-k8s.sh
-
-### Download openstack-helm & openstack-helm-infra source
-
-    $ git clone https://github.com/openstack/openstack-helm.git
-    $ git clone https://github.com/openstack/openstack-helm-infra.git
 
 ### Deploy infra components for OpenStack
     $ ./20-infra/21-setup-client.sh
@@ -43,7 +36,6 @@ Minimum Hardware (VM) Requirements
     $ ./20-infra/27-memcached.sh
     
 ### Deploy OpenStack
-
     $ ./30-newton-deploy/31-keystone.sh
     $ ./30-newton-deploy/32-ceph-radosgateway.sh
     $ ./30-newton-deploy/33-glance.sh
@@ -55,7 +47,6 @@ Minimum Hardware (VM) Requirements
     $ ./30-newton-deploy/39-horizon.sh
 
 ### Deploy Monitoring - Prometheus
-
     $ ./40-prometheus/41-lma-nfs-provisioner.sh
     $ ./40-prometheus/42-prometheus.sh
     $ ./40-prometheus/43-node-exporter.sh
@@ -71,7 +62,6 @@ Minimum Hardware (VM) Requirements
     admin / admin
     
 ### Initialize OpenStack and Launch an instance (Virtual Machine)
-
     $ ./90-common/800-setup-gateway.sh
     $ ./90-common/900-use-it.sh
 
