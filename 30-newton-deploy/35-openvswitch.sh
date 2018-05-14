@@ -26,7 +26,7 @@ helm upgrade --install openvswitch ~/vancouver-workshop/openstack-helm/openvswit
   ${OSH_EXTRA_HELM_ARGS_OPENVSWITCH}
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstac
+bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status openvswitch
