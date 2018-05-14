@@ -42,6 +42,31 @@ images:
     dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
 bootstrap:
   enabled: false
+network:
+  interface:
+    tunnel: docker0
+conf:
+  neutron:
+    DEFAULT:
+      l3_ha: False
+      min_l3_agents_per_router: 1
+      max_l3_agents_per_router: 1
+      l3_ha_network_type: vxlan
+      dhcp_agents_per_network: 1
+  plugins:
+    ml2_conf:
+      ml2_type_flat:
+        flat_networks: public
+    #NOTE(portdirect): for clarity we include options for all the neutron
+    # backends here.
+    openvswitch_agent:
+      agent:
+        tunnel_types: vxlan
+      ovs:
+        bridge_mappings: public:br-ex
+    linuxbridge_agent:
+      linux_bridge:
+        bridge_mappings: public:br-ex
 EOF
 helm upgrade neutron ~/vancouver-workshop/openstack-helm/neutron \
     -f /tmp/neutron-ocata.yaml
