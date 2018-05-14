@@ -27,7 +27,7 @@ openstack stack create --wait \
   --parameter subnet_name=${OSH_EXT_SUBNET_NAME} \
   --parameter subnet_cidr=${OSH_EXT_SUBNET} \
   --parameter subnet_gateway=${OSH_BR_EX_ADDR%/*} \
-  -t ./tools/gate/files/heat-public-net-deployment.yaml \
+  -t ~/vancouver-workshop/openstack-helm/tools/gate/files/heat-public-net-deployment.yaml \
   heat-public-net-deployment
 
 export OSH_PRIVATE_SUBNET_POOL="10.0.0.0/8"
@@ -37,7 +37,7 @@ openstack stack create --wait \
   --parameter subnet_pool_name=${OSH_PRIVATE_SUBNET_POOL_NAME} \
   --parameter subnet_pool_prefixes=${OSH_PRIVATE_SUBNET_POOL} \
   --parameter subnet_pool_default_prefix_length=${OSH_PRIVATE_SUBNET_POOL_DEF_PREFIX} \
-  -t ./tools/gate/files/heat-subnet-pool-deployment.yaml \
+  -t ~/vancouver-workshop/openstack-helm/tools/gate/files/heat-subnet-pool-deployment.yaml \
   heat-subnet-pool-deployment
 
 
@@ -61,7 +61,7 @@ openstack stack create --wait \
     --parameter image="${IMAGE_NAME}" \
     --parameter ssh_key=${OSH_VM_KEY_STACK} \
     --parameter cidr=${OSH_PRIVATE_SUBNET} \
-    -t ./tools/gate/files/heat-basic-vm-deployment.yaml \
+    -t ~/vancouver-workshop/openstack-helm/tools/gate/files/heat-basic-vm-deployment.yaml \
     heat-basic-vm-deployment
 
 FLOATING_IP=$(openstack stack output show \
@@ -111,7 +111,7 @@ if helm ls --short | grep -q "^cinder$"; then
   # Create and attach a block device to the instance
   openstack stack create --wait \
     --parameter instance_uuid=${INSTANCE_ID} \
-    -t ./tools/gate/files/heat-vm-volume-attach.yaml \
+    -t ~/vancouver-workshop/openstack-helm/tools/gate/files/heat-vm-volume-attach.yaml \
     heat-vm-volume-attach
 
   # Get the the devices that are present on the instance
