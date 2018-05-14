@@ -15,9 +15,9 @@
 #    under the License.
 set -xe
 
-for JOBS in nova-bootstrap nova-cell-setup nova-db-init nova-db-sync nova-ks-endpoints nova-ks-service nova-ks-user placement-ks-endpoints placement-ks-service placement-ks-user; do
-  kubectl --namespace openstack delete job "${JOBS}"
-done
+#for JOBS in nova-bootstrap nova-cell-setup nova-db-init nova-db-sync nova-ks-endpoints nova-ks-service nova-ks-user placement-ks-endpoints placement-ks-service placement-ks-user; do
+#  kubectl --namespace openstack delete job "${JOBS}"
+#done
 
 tee /tmp/nova-ocata.yaml <<EOF
 images:
@@ -49,8 +49,16 @@ images:
 bootstrap:
   enabled: false
 EOF
-helm upgrade nova ~/vancouver-workshop/openstack-helm/nova \
-    -f /tmp/nova-ocata.yaml
+if [ "x$(systemd-detect-virt)" == "xnone" ]; then
+  echo 'OSH is not being deployed in virtualized environment'
+  helm upgrade nova ~/vancouver-workshop/openstack-helm/nova \
+      -f /tmp/nova-ocata.yaml
+else
+  echo 'OSH is being deployed in virtualized environment, using qemu for nova'
+  helm upgrade nova ~/vancouver-workshop/openstack-helm/nova \
+      -f /tmp/nova-ocata.yaml \
+      --set conf.nova.libvirt.virt_type=qemu
+fi
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
