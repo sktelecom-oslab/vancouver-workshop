@@ -15,9 +15,9 @@
 #    under the License.
 set -xe
 
-#for JOBS in nova-bootstrap nova-cell-setup nova-db-init nova-db-sync nova-ks-endpoints nova-ks-service nova-ks-user placement-ks-endpoints placement-ks-service placement-ks-user; do
-#  kubectl --namespace openstack delete job "${JOBS}"
-#done
+for JOBS in nova-bootstrap nova-cell-setup nova-db-init nova-db-sync nova-ks-endpoints nova-ks-service nova-ks-user placement-ks-endpoints placement-ks-service placement-ks-user; do
+  kubectl --namespace openstack delete job "${JOBS}"
+done
 
 tee /tmp/nova-ocata.yaml <<EOF
 images:
