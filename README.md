@@ -50,6 +50,16 @@ Minimum Hardware (VM) Requirements
     $ ./90-common/800-setup-gateway.sh
     $ ./90-common/900-use-it.sh
 
+First, populate environment variables with the location of the Identity service and the admin project and user credentials. This script also creates all the necessary resources to launch an instances and access it.
+
+* Create private network
+* Create public network
+* Create router
+* Add security group for ssh
+* Create private key
+* Create virtual machine
+* Add public ip to vm
+
 ### Deploy Monitoring - Prometheus
     $ ./40-prometheus/41-lma-nfs-provisioner.sh
     $ ./40-prometheus/42-prometheus.sh
@@ -75,22 +85,10 @@ Minimum Hardware (VM) Requirements
 #### Grafana
     http://<HOST_IP>:30902
     admin / admin
-    
-First, populate environment variables with the location of the Identity service and the admin project and user credentials. This script also creates all the necessary resources to launch an instances and access it.
-
-* Create private network
-* Create public network
-* Create router
-* Add security group for ssh
-* Create private key
-* Create virtual machine
-* Add public ip to vm
 
 ## Appendix
 
 ### Acknowledgement
-
-
 
 [OpenStack-Helm]: https://github.com/openstack/openstack-helm
 [OpenStack-Helm Document]: https://docs.openstack.org/openstack-helm/latest/readme.html
