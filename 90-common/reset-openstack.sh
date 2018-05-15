@@ -1,11 +1,23 @@
-for NS in openstack ceph nfs libvirt; do 
-   helm ls --namespace $NS --short | xargs -L1 -P2 helm delete --purge;
-done;
-sudo systemctl stop kubelet;
-sudo systemctl disable kubelet;
-sudo docker ps -aq | xargs -L1 -P16 sudo docker rm -f;
-sudo rm -rf /var/lib/openstack-helm/*;
-sudo rm -rf /var/lib/nova/*;
-sudo rm -rf /var/lib/libvirt/*;
-sudo rm -rf /etc/libvirt/qemu/*;
-sudo findmnt --raw | awk '/^\/var\/lib\/kubelet\/pods/ { print $1 }' | xargs -L1 -P16 sudo umount -f -l;
+#!/bin/bash
+set -ex
+
+for NS in ceph openstack ; do
+    kubectl delete --force=true --grace-period=1 --ignore-not-found=true ns $NS
+    end=$(expr $(date +%s) + 20)
+    while true; do
+        RELEASES_CNT=$(helm list -a -q --namespace $NS | wc -l)
+        [ $RELEASES_CNT -ne 0 ] && break || true
+        sleep 5
+        now=$(date +%s)
+        [ $now -gt $end ] && echo can not find $NS releases. && break
+    done
+    RELEASES=$(helm list -a -q --namespace $NS)
+    for RELEASE in $RELEASES ; do
+        helm delete --purge --no-hooks $RELEASE
+        sleep 1
+    done
+done
+kubectl delete pv --all
+
+rm -rf /var/lib/openstack-helm /var/lib/neutron /var/lib/nova /var/lib/libvirt /var/lib/openvswitch /run/openvswitch* /run/libvirt*
+
