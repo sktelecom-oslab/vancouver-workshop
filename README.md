@@ -52,6 +52,15 @@ Minimum Hardware (VM) Requirements
     $ ./40-prometheus/43-node-exporter.sh
     $ ./40-prometheus/44-grafana.sh
 
+### Deploy Monitoring - Prometheus
+    $ ./50-ocata-upgrade/51-keystone.sh
+    $ ./50-ocata-upgrade/52-glance.sh
+    $ ./50-ocata-upgrade/53-cinder.sh
+    $ ./50-ocata-upgrade/54-neutron.sh
+    $ ./50-ocata-upgrade/55-nova.sh
+    $ ./50-ocata-upgrade/56-heat.sh
+    $ ./50-ocata-upgrade/57-horizon.sh
+
 ###  Access Horizon & Grafana
 #### Horizon
     http://<HOST_NAME>:31000
