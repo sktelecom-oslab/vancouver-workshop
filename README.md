@@ -54,7 +54,8 @@ Minimum Hardware (VM) Requirements
     $ ./40-prometheus/41-lma-nfs-provisioner.sh
     $ ./40-prometheus/42-prometheus.sh
     $ ./40-prometheus/43-node-exporter.sh
-    $ ./40-prometheus/44-grafana.sh
+    $ ./40-prometheus/44-openstack-exporter.sh
+    $ ./40-prometheus/45-grafana.sh
 
 ### Upgrade Openstack - Ocata release
     $ ./50-ocata-upgrade/51-keystone.sh
