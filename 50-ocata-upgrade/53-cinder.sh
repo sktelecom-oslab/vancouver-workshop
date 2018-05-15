@@ -42,6 +42,17 @@ images:
     image_repo_sync: docker.io/docker:17.07.0
 bootstrap:
   enabled: false
+conf:
+  ceph:
+    pools:
+      backup:
+        replication: 1
+        crush_rule: same_host
+        chunk_size: 8
+      volume:
+        replication: 1
+        crush_rule: same_host
+        chunk_size: 8
 EOF
 helm upgrade cinder ~/vancouver-workshop/openstack-helm/cinder \
     -f /tmp/cinder-ocata.yaml
