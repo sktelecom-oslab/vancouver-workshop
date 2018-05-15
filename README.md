@@ -46,6 +46,10 @@ Minimum Hardware (VM) Requirements
     $ ./30-newton-deploy/38-heat.sh
     $ ./30-newton-deploy/39-horizon.sh
 
+### Initialize OpenStack and Launch an instance (Virtual Machine)
+    $ ./90-common/800-setup-gateway.sh
+    $ ./90-common/900-use-it.sh
+
 ### Deploy Monitoring - Prometheus
     $ ./40-prometheus/41-lma-nfs-provisioner.sh
     $ ./40-prometheus/42-prometheus.sh
@@ -70,10 +74,6 @@ Minimum Hardware (VM) Requirements
     http://<HOST_NAME>:30902
     admin / admin
     
-### Initialize OpenStack and Launch an instance (Virtual Machine)
-    $ ./90-common/800-setup-gateway.sh
-    $ ./90-common/900-use-it.sh
-
 First, populate environment variables with the location of the Identity service and the admin project and user credentials. This script also creates all the necessary resources to launch an instances and access it.
 
 * Create private network
