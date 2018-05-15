@@ -68,11 +68,12 @@ Minimum Hardware (VM) Requirements
 
 ###  Access Horizon & Grafana
 #### Horizon
-    http://<HOST_NAME>:31000
+    http://<HOST_IP>:31000
+    domain: default
     admin / password
 
 #### Grafana
-    http://<HOST_NAME>:30902
+    http://<HOST_IP>:30902
     admin / admin
     
 First, populate environment variables with the location of the Identity service and the admin project and user credentials. This script also creates all the necessary resources to launch an instances and access it.
