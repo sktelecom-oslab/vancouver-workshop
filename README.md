@@ -56,7 +56,7 @@ Minimum Hardware (VM) Requirements
     $ ./40-prometheus/43-node-exporter.sh
     $ ./40-prometheus/44-grafana.sh
 
-### Deploy Monitoring - Prometheus
+### Upgrade Openstack - Ocata release
     $ ./50-ocata-upgrade/51-keystone.sh
     $ ./50-ocata-upgrade/52-glance.sh
     $ ./50-ocata-upgrade/53-cinder.sh
@@ -83,10 +83,6 @@ First, populate environment variables with the location of the Identity service 
 * Create private key
 * Create virtual machine
 * Add public ip to vm
-
-### Upgrade Openstack - Ocata release
-
-    $ #TODO
 
 ## Appendix
 
