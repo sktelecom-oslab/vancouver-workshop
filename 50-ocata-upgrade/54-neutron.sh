@@ -13,12 +13,12 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-set -xe
-
+set -x
 for JOBS in neutron-db-init neutron-db-sync neutron-ks-endpoints neutron-ks-service neutron-ks-user; do
   kubectl --namespace openstack delete job "${JOBS}"
 done
 
+set -xe
 tee /tmp/neutron-ocata.yaml <<EOF
 images:
   tags:

@@ -13,13 +13,12 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
-set -xe
-
+set -x
 for JOBS in glance-db-init glance-db-sync glance-ks-endpoints glance-ks-service glance-ks-user glance-storage-init; do
   kubectl --namespace openstack delete job "${JOBS}"
 done
 
+set -xe
 tee /tmp/glance-ocata.yaml <<EOF
 images:
   tags:

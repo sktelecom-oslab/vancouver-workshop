@@ -13,12 +13,12 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-set -xe
-
+set -x
 for JOBS in heat-bootstrap heat-db-init heat-db-sync heat-domain-ks-user heat-ks-endpoints heat-ks-service heat-ks-user heat-trustee-ks-user heat-trusts; do
   kubectl --namespace openstack delete job "${JOBS}"
 done
 
+set -xe
 tee /tmp/heat-ocata.yaml <<EOF
 images:
   tags:
