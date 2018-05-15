@@ -32,7 +32,9 @@ bootstrap:
   enabled: false
 EOF
 helm upgrade horizon ~/vancouver-workshop/openstack-helm/horizon \
-    -f /tmp/horizon-ocata.yaml
+    -f /tmp/horizon-ocata.yaml \
+    --set network.node_port.enabled=true \
+    --set network.node_port.port=31000 \
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
