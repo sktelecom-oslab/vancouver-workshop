@@ -35,8 +35,8 @@ clouds:
 EOF
 
 #NOTE: Build charts
-cd ~/vancouver-workshop/openstack-helm
+cd /opt/openstack-helm
 make all
 
-cd ~/vancouver-workshop/openstack-helm-infra
+cd /opt/openstack-helm-infra
 make helm-toolkit grafana prometheus prometheus-node-exporter nfs-provisioner

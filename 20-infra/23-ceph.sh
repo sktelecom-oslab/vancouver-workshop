@@ -161,8 +161,9 @@ pod:
     mgr: 1
 EOF
 
+WORK_DIR=/opt/openstack-helm
 for CHART in ceph-mon ceph-osd ceph-client; do
-  helm upgrade --install ${CHART} ~/vancouver-workshop/openstack-helm/${CHART} \
+  helm upgrade --install ${CHART} ${WORK_DIR}/${CHART} \
     --namespace=ceph \
     --values=/tmp/ceph.yaml \
     ${OSH_EXTRA_HELM_ARGS} \

@@ -21,7 +21,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install memcached ~/vancouver-workshop/openstack-helm/memcached \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install memcached ${WORK_DIR}/memcached \
     --namespace=openstack \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_MEMCACHED}

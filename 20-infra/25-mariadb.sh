@@ -21,7 +21,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install mariadb ~/vancouver-workshop/openstack-helm/mariadb \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install mariadb ${WORK_DIR}/mariadb \
     --namespace=openstack \
     --set pod.replicas.server=1 \
     ${OSH_EXTRA_HELM_ARGS} \

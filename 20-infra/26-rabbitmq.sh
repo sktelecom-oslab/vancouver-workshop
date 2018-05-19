@@ -21,7 +21,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install rabbitmq ~/vancouver-workshop/openstack-helm/rabbitmq \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install rabbitmq ${WORK_DIR}/rabbitmq \
     --namespace=openstack \
     --set pod.replicas.server=1 \
     --set monitoring.prometheus.enabled=true \

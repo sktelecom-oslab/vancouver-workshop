@@ -29,14 +29,15 @@ network:
   host_namespace: true
 EOF
 
-helm upgrade --install ingress-kube-system ~/vancouver-workshop/openstack-helm/ingress \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install ingress-kube-system ${WORK_DIR}/ingress \
   --namespace=kube-system \
   --values=/tmp/ingress-kube-system.yaml \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_INGRESS_KUBE_SYSTEM}
 
 #NOTE: Deploy namespace ingress
-helm upgrade --install ingress-openstack ~/vancouver-workshop/openstack-helm/ingress \
+helm upgrade --install ingress-openstack ${WORK_DIR}/ingress \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_INGRESS_OPENSTACK}
