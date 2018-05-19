@@ -16,12 +16,10 @@
 
 set -xe
 
-#NOTE: Pull images and lint chart
-#make pull-images prometheus-node-exporter
-
+WORK_DIR=/opt/openstack-helm-infra
 #NOTE: Deploy command
 helm upgrade --install prometheus-node-exporter \
-    ~/vancouver-workshop/openstack-helm-infra/prometheus-node-exporter --namespace=kube-system
+    ${WORK_DIR}/prometheus-node-exporter --namespace=kube-system
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh kube-system

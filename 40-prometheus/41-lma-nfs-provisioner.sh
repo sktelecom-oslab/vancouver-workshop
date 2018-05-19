@@ -16,17 +16,10 @@
 
 set -xe
 
-#NOTE: Deploy nfs instance for logging, monitoring and alerting components
-tee /tmp/lma-nfs-provisioner.yaml << EOF
-labels:
-  node_selector_key: openstack-control-plane
-  node_selector_value: enabled
-storageclass:
-  name: openstack-helm-lma-nfs
-EOF
+WORK_DIR=/opt/openstack-helm-infra
 helm upgrade --install lma-nfs-provisioner \
-    ~/vancouver-workshop/openstack-helm-infra/nfs-provisioner --namespace=openstack \
-    --values=/tmp/lma-nfs-provisioner.yaml
+    ${WORK_DIR}/nfs-provisioner --namespace=openstack \
+    --values=./override-files/lma-nfs-provisioner.yaml
 
 #NOTE: Wait for deployment
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack

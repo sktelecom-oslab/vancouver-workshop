@@ -16,23 +16,13 @@
 
 set -xe
 
-#NOTE: Lint and package chart
-# make prometheus-openstack-exporter
 
+WORK_DIR=/opt/openstack-helm-infra
 #NOTE: Deploy command
-tee /tmp/prometheus-openstack-exporter.yaml << EOF
-manifests:
-  job_ks_user: true
-dependencies:
-  static:
-    prometheus_openstack_exporter:
-      jobs: null
-      services: null
-EOF
 helm upgrade --install prometheus-openstack-exporter \
-    ~/vancouver-workshop/openstack-helm-infra/prometheus-openstack-exporter \
+    ${WORK_DIR}/prometheus-openstack-exporter \
     --namespace=openstack \
-    --values=/tmp/prometheus-openstack-exporter.yaml
+    --values=./override-files/prometheus-openstack-exporter.yaml
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack

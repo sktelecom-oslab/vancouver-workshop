@@ -16,41 +16,12 @@
 
 set -xe
 
-#NOTE: Pull images and lint chart
-# make pull-images grafana
 
+WORK_DIR=/opt/openstack-helm-infra
 #NOTE: Deploy command
-tee /tmp/grafana.yaml << EOF
-dependencies:
-  static:
-    grafana:
-      jobs: null
-      services: null
-manifests:
-  ingress: false
-  job_db_init: false
-  job_db_init_session: false
-  job_db_session_sync: false
-  secret_db: false
-  secret_db_session: false
-  service_ingress: false
-conf:
-  grafana:
-    database:
-      type: sqlite3
-    session:
-      provider: file
-      provider_config: sessions
-network:
-  grafana:
-    ingress:
-      public: false
-    node_port:
-      enabled: true
-EOF
-helm upgrade --install grafana ~/vancouver-workshop/openstack-helm-infra/grafana \
+helm upgrade --install grafana ${WORK_DIR}/grafana \
     --namespace=openstack \
-    --values=/tmp/grafana.yaml
+    --values=./override-files/grafana.yaml
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack

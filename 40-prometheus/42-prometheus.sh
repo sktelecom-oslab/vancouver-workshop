@@ -16,23 +16,10 @@
 
 set -xe
 
-#NOTE: Pull images and lint chart
-#make pull-images prometheus
-
-#NOTE: Deploy command
-tee /tmp/prometheus.yaml << EOF
-storage:
-  storage_class: openstack-helm-lma-nfs
-network:
-  prometheus:
-    ingress:
-      public: false
-    node_port:
-      enabled: true
-EOF
-helm upgrade --install prometheus ~/vancouver-workshop/openstack-helm-infra/prometheus \
+WORK_DIR=/opt/openstack-helm-infra
+helm upgrade --install prometheus ${WORK_DIR}/prometheus \
     --namespace=openstack \
-    --values=/tmp/prometheus.yaml
+    --values=./override-files/prometheus.yaml
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
