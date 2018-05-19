@@ -1,0 +1,8 @@
+storage:
+  storage_class: openstack-helm-lma-nfs
+network:
+  prometheus:
+    ingress:
+      public: false
+    node_port:
+      enabled: true
