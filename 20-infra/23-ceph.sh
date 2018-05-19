@@ -170,7 +170,7 @@ for CHART in ceph-mon ceph-osd ceph-client; do
     ${OSH_EXTRA_HELM_ARGS_CEPH_DEPLOY}
 
   #NOTE: Wait for deploy
-  bash ~/vancouver-workshop/90-common/wait-for-pods.sh ceph
+  bash /opt/vancouver-workshop/90-common/wait-for-pods.sh ceph
 
   #NOTE: Validate deploy
   MON_POD=$(kubectl get pods \

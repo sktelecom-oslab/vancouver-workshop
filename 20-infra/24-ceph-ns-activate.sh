@@ -54,7 +54,7 @@ helm upgrade --install ceph-openstack-config ${WORK_DIR}/ceph-client \
   ${OSH_EXTRA_HELM_ARGS_CEPH_NS_ACTIVATE}
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 kubectl get -n openstack jobs --show-all

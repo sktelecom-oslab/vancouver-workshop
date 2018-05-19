@@ -26,7 +26,7 @@ helm upgrade cinder ${WORK_DIR}/cinder \
     -f ./override-files/cinder-ocata.yaml
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 export OS_CLOUD=openstack_helm

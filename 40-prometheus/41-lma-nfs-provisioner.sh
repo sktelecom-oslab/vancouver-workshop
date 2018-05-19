@@ -22,7 +22,7 @@ helm upgrade --install lma-nfs-provisioner \
     --values=./override-files/lma-nfs-provisioner.yaml
 
 #NOTE: Wait for deployment
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status lma-nfs-provisioner

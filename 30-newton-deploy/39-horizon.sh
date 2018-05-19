@@ -30,7 +30,7 @@ helm upgrade --install horizon ${WORK_DIR}/horizon \
     ${OSH_EXTRA_HELM_ARGS_HORIZON}
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status horizon

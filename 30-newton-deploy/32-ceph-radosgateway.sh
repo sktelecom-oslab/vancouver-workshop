@@ -53,7 +53,7 @@ helm upgrade --install radosgw-openstack ${WORK_DIR}/ceph-client \
   ${OSH_EXTRA_HELM_ARGS_CEPH_RGW}
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status radosgw-openstack

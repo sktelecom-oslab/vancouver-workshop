@@ -72,7 +72,7 @@ helm upgrade --install neutron ${WORK_DIR}/neutron \
     ${OSH_EXTRA_HELM_ARGS_NEUTRON}
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 export OS_CLOUD=openstack_helm

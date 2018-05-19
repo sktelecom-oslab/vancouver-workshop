@@ -22,7 +22,7 @@ helm upgrade --install prometheus-node-exporter \
     ${WORK_DIR}/prometheus-node-exporter --namespace=kube-system
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh kube-system
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh kube-system
 
 #NOTE: Validate Deployment info
 helm status prometheus-node-exporter

@@ -22,7 +22,7 @@ helm upgrade --install prometheus ${WORK_DIR}/prometheus \
     --values=./override-files/prometheus.yaml
 
 #NOTE: Wait for deploy
-bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
+bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
 
 #NOTE: Validate Deployment info
 helm status prometheus
