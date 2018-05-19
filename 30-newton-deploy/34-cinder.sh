@@ -33,7 +33,8 @@ conf:
         crush_rule: same_host
         chunk_size: 8
 EOF
-helm upgrade --install cinder ~/vancouver-workshop/openstack-helm/cinder \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install cinder ${WORK_DIR}/cinder \
   --namespace=openstack \
   --values=/tmp/cinder.yaml \
   ${OSH_EXTRA_HELM_ARGS} \

@@ -21,8 +21,7 @@ WORK_DIR=/opt/openstack-helm-infra
 #NOTE: Deploy command
 helm upgrade --install prometheus-openstack-exporter \
     ${WORK_DIR}/prometheus-openstack-exporter \
-    --namespace=openstack \
-    --values=./override-files/prometheus-openstack-exporter.yaml
+    --namespace=openstack
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack

@@ -20,7 +20,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install heat ~/vancouver-workshop/openstack-helm/heat \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install heat ${WORK_DIR}/heat \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_HEAT}

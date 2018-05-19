@@ -45,7 +45,8 @@ conf:
   rgw_ks:
     enabled: true
 EOF
-helm upgrade --install radosgw-openstack ~/vancouver-workshop/openstack-helm/ceph-client \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install radosgw-openstack ${WORK_DIR}/ceph-client \
   --namespace=openstack \
   --values=/tmp/radosgw-openstack.yaml \
   ${OSH_EXTRA_HELM_ARGS} \

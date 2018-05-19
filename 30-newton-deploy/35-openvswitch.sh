@@ -20,7 +20,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install openvswitch ~/vancouver-workshop/openstack-helm/openvswitch \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install openvswitch ${WORK_DIR}/openvswitch \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_OPENVSWITCH}

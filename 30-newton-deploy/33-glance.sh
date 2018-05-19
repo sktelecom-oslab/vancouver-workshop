@@ -23,7 +23,8 @@ set -xe
 : ${OSH_EXTRA_HELM_ARGS:=""}
 #NOTE(portdirect), this could be: radosgw, rbd, swift or pvc
 : ${GLANCE_BACKEND:="radosgw"}
-helm upgrade --install glance ~/vancouver-workshop/openstack-helm/glance \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install glance ${WORK_DIR}/glance \
   --namespace=openstack \
   --set storage=${GLANCE_BACKEND} \
   ${OSH_EXTRA_HELM_ARGS} \

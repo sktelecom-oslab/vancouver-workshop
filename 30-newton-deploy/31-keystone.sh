@@ -19,9 +19,10 @@ set -xe
 #NOTE: Lint and package chart
 # make keystone
 
+WORK_DIR=/opt/openstack-helm
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install keystone ~/vancouver-workshop/openstack-helm/keystone \
+helm upgrade --install keystone ${WORK_DIR}/keystone \
     --namespace=openstack \
     ${OSH_EXTRA_HELM_ARGS} \
     ${OSH_EXTRA_HELM_ARGS_KEYSTONE}

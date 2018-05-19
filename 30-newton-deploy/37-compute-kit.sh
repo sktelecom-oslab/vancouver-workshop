@@ -20,16 +20,17 @@ set -xe
 # make neutron
 
 #NOTE: Deploy nova
+WORK_DIR=/opt/openstack-helm
 : ${OSH_EXTRA_HELM_ARGS:=""}
 if [ "x$(systemd-detect-virt)" == "xnone" ]; then
   echo 'OSH is not being deployed in virtualized environment'
-  helm upgrade --install nova ~/vancouver-workshop/openstack-helm/nova \
+  helm upgrade --install nova ${WORK_DIR}/nova \
       --namespace=openstack \
       ${OSH_EXTRA_HELM_ARGS} \
       ${OSH_EXTRA_HELM_ARGS_NOVA}
 else
   echo 'OSH is being deployed in virtualized environment, using qemu for nova'
-  helm upgrade --install nova ~/vancouver-workshop/openstack-helm/nova \
+  helm upgrade --install nova ${WORK_DIR}/nova \
       --namespace=openstack \
       --set conf.nova.libvirt.virt_type=qemu \
       ${OSH_EXTRA_HELM_ARGS} \
@@ -64,7 +65,7 @@ conf:
       linux_bridge:
         bridge_mappings: public:br-ex
 EOF
-helm upgrade --install neutron ~/vancouver-workshop/openstack-helm/neutron \
+helm upgrade --install neutron ${WORK_DIR}/neutron \
     --namespace=openstack \
     --values=/tmp/neutron.yaml \
     ${OSH_EXTRA_HELM_ARGS} \

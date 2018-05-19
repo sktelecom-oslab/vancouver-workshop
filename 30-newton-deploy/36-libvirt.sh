@@ -20,7 +20,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install libvirt ~/vancouver-workshop/openstack-helm/libvirt \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install libvirt ${WORK_DIR}/libvirt \
   --namespace=openstack \
   ${OSH_EXTRA_HELM_ARGS} \
   ${OSH_EXTRA_HELM_ARGS_LIBVIRT}

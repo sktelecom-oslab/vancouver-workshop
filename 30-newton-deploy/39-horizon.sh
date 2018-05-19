@@ -21,7 +21,8 @@ set -xe
 
 #NOTE: Deploy command
 : ${OSH_EXTRA_HELM_ARGS:=""}
-helm upgrade --install horizon ~/vancouver-workshop/openstack-helm/horizon \
+WORK_DIR=/opt/openstack-helm
+helm upgrade --install horizon ${WORK_DIR}/horizon \
     --namespace=openstack \
     --set network.node_port.enabled=true \
     --set network.node_port.port=31000 \
