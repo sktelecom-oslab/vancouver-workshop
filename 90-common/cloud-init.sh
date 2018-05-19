@@ -5,6 +5,7 @@ echo "ubuntu:openstackhelm" | sudo -H chpasswd
 sudo -H sed -i 's|PasswordAuthentication no|PasswordAuthentication yes|g' /etc/ssh/sshd_config
 sudo -H systemctl restart sshd
 
+sudo -H chown -R ubuntu: /opt
 sudo -H su -c 'git clone https://github.com/sktelecom-oslab/vancouver-workshop.git /opt/vancouver-workshop' ubuntu
 sudo -H su -c 'git clone https://git.openstack.org/openstack/openstack-helm /opt/openstack-helm' ubuntu
 sudo -H su -c '(cd /opt/openstack-helm; git reset --hard a4fa9b761e2de14df588c1e37f3693174f15ad36)' ubuntu
