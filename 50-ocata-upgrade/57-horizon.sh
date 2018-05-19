@@ -13,25 +13,16 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+
 set -x
-for JOBS in horizon-db-init horizon-db-sync; do
-  kubectl --namespace openstack delete job "${JOBS}"
+for JOBS in $(kubectl get jobs -n openstack | grep horizon | awk '{print $1}'); do
+  kubectl delete job $JOBS -n openstack;
 done
 
 set -xe
-tee /tmp/horizon-ocata.yaml <<EOF
-images:
-  tags:
-    db_init: docker.io/openstackhelm/heat:ocata
-    horizon_db_sync: docker.io/openstackhelm/horizon:ocata
-    db_drop: docker.io/openstackhelm/heat:ocata
-    horizon: docker.io/openstackhelm/horizon:ocata
-    dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
-bootstrap:
-  enabled: false
-EOF
-helm upgrade horizon ~/vancouver-workshop/openstack-helm/horizon \
-    -f /tmp/horizon-ocata.yaml \
+WORK_DIR=/opt/openstack-helm
+helm upgrade horizon ${WORK_DIR}/horizon \
+    -f ./override-files/horizon-ocata.yaml \
     --set network.node_port.enabled=true \
     --set network.node_port.port=31000 \
 

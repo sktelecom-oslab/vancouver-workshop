@@ -1,0 +1,7 @@
+images:
+  tags:
+    db_init: docker.io/openstackhelm/heat:ocata
+    horizon_db_sync: docker.io/openstackhelm/horizon:ocata
+    db_drop: docker.io/openstackhelm/heat:ocata
+    horizon: docker.io/openstackhelm/horizon:ocata
+    dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1

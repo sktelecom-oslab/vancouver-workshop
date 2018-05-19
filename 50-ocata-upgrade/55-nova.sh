@@ -14,49 +14,20 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 set -x
-for JOBS in nova-bootstrap nova-cell-setup nova-db-init nova-db-sync nova-ks-endpoints nova-ks-service nova-ks-user placement-ks-endpoints placement-ks-service placement-ks-user; do
-  kubectl --namespace openstack delete job "${JOBS}"
+for JOBS in $(kubectl get jobs -n openstack | egrep '(nova|placement)' | awk '{print $1}'); do
+  kubectl delete job $JOBS -n openstack; 
 done
 
 set -xe
-tee /tmp/nova-ocata.yaml <<EOF
-images:
-  tags:
-    bootstrap: docker.io/openstackhelm/heat:ocata
-    db_drop: docker.io/openstackhelm/heat:ocata
-    db_init: docker.io/openstackhelm/heat:ocata
-    dep_check: 'quay.io/stackanetes/kubernetes-entrypoint:v0.3.1'
-    rabbit_init: docker.io/rabbitmq:3.7-management
-    ks_user: docker.io/openstackhelm/heat:ocata
-    ks_service: docker.io/openstackhelm/heat:ocata
-    ks_endpoints: docker.io/openstackhelm/heat:ocata
-    nova_api: docker.io/openstackhelm/nova:ocata
-    nova_cell_setup: docker.io/openstackhelm/nova:ocata
-    nova_cell_setup_init: docker.io/openstackhelm/heat:ocata
-    nova_compute: docker.io/openstackhelm/nova:ocata
-    nova_compute_ironic: 'docker.io/kolla/ubuntu-source-nova-compute-ironic:3.0.3'
-    nova_compute_ssh: docker.io/openstackhelm/nova:ocata
-    nova_conductor: docker.io/openstackhelm/nova:ocata
-    nova_consoleauth: docker.io/openstackhelm/nova:ocata
-    nova_db_sync: docker.io/openstackhelm/nova:ocata
-    nova_novncproxy: docker.io/openstackhelm/nova:ocata
-    nova_novncproxy_assets: 'docker.io/kolla/ubuntu-source-nova-novncproxy:3.0.3'
-    nova_placement: docker.io/openstackhelm/nova:ocata
-    nova_scheduler: docker.io/openstackhelm/nova:ocata
-    nova_spiceproxy: docker.io/openstackhelm/nova:ocata
-    nova_spiceproxy_assets: 'docker.io/kolla/ubuntu-source-nova-spicehtml5proxy:3.0.3'
-    test: 'docker.io/kolla/ubuntu-source-rally:ocata'
-bootstrap:
-  enabled: false
-EOF
+WORK_DIR=/opt/openstack-helm
 if [ "x$(systemd-detect-virt)" == "xnone" ]; then
   echo 'OSH is not being deployed in virtualized environment'
-  helm upgrade nova ~/vancouver-workshop/openstack-helm/nova \
-      -f /tmp/nova-ocata.yaml
+  helm upgrade nova ${WORK_DIR}/nova \
+      -f ./override-files/nova-ocata.yaml
 else
   echo 'OSH is being deployed in virtualized environment, using qemu for nova'
-  helm upgrade nova ~/vancouver-workshop/openstack-helm/nova \
-      -f /tmp/nova-ocata.yaml \
+  helm upgrade nova ${WORK_DIR}/nova \
+      -f ./override-files/nova-ocata.yaml \
       --set conf.nova.libvirt.virt_type=qemu
 fi
 

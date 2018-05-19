@@ -14,34 +14,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 set -x
-for JOBS in keystone-db-init keystone-db-sync keystone-bootstrap keystone-credential-setup keystone-domain-manage keystone-fernet-setup; do
-  kubectl --namespace openstack delete job "${JOBS}"
+for JOBS in $(kubectl get jobs -n openstack | grep keystone | awk '{print $1}'); do
+  kubectl delete job $JOBS -n openstack;
 done
 
-set -xe
-tee /tmp/keystone-ocata.yaml <<EOF
-images:
-  tags:
-    bootstrap: docker.io/openstackhelm/heat:ocata
-    test: docker.io/kolla/ubuntu-source-rally:ocata
-    db_init: docker.io/openstackhelm/heat:ocata
-    keystone_db_sync: docker.io/openstackhelm/keystone:ocata
-    db_drop: docker.io/openstackhelm/heat:ocata
-    ks_user: docker.io/openstackhelm/heat:ocata
-    rabbit_init: docker.io/rabbitmq:3.7-management
-    keystone_fernet_setup: docker.io/openstackhelm/keystone:ocata
-    keystone_fernet_rotate: docker.io/openstackhelm/keystone:ocata
-    keystone_credential_setup: docker.io/openstackhelm/keystone:ocata
-    keystone_credential_rotate: docker.io/openstackhelm/keystone:ocata
-    keystone_api: docker.io/openstackhelm/keystone:ocata
-    keystone_domain_manage: docker.io/openstackhelm/keystone:ocata
-    dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
-    image_repo_sync: docker.io/docker:17.07.0
-bootstrap:
-  enabled: false
-EOF
-helm upgrade keystone ~/vancouver-workshop/openstack-helm/keystone \
-    -f /tmp/keystone-ocata.yaml
+WORK_DIR=/opt/openstack-helm
+
+helm upgrade --install keystone ${WORK_DIR}/keystone \
+    -f ./override-files/keystone-ocata.yaml
 
 #NOTE: Wait for deploy
 bash ~/vancouver-workshop/90-common/wait-for-pods.sh openstack
