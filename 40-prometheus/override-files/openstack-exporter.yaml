@@ -1,0 +1,7 @@
+manifests:
+  job_ks_user: true
+dependencies:
+  static:
+    prometheus_openstack_exporter:
+      jobs: null
+      services: null
