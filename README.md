@@ -25,36 +25,34 @@ Minimum Hardware (VM) Requirements
          /opt/openstack-helm-infra
     $ cd /opt/openstack-helm-infra; git reset --hard 39e1f7f9f38d6e8b704471acca4e30e912417f28
 
-### Initialize environment and install all related packages using
-    $ /opt/openstack-helm/tools/deployment/developer/common/000-install-packages.sh
+### Kubernetes and Common Setup
+    $ cd /opt/openstack-helm
+    $ ./tools/deployment/developer/common/000-install-packages.sh
+    $ ./tools/deployment/developer/common/010-deploy-k8s.sh
+    $ ./tools/deployment/developer/common/020-setup-client.sh
 
-### Deploy kubernetes cluster at your single machine
-    $ /opt/openstack-helm/tools/deployment/developer/common/010-deploy-k8s.sh
-    $ /opt/openstack-helm/tools/deployment/developer/common/020-setup-client.sh
+### Deploy OpenStack With Ceph
+    $ cd /opt/openstack-helm
+    $ ./tools/deployment/developer/ceph/030-ingress.sh
+    $ ./tools/deployment/developer/ceph/040-ceph.sh
+    $ ./tools/deployment/developer/ceph/045-ceph-ns-activate.sh
+    $ ./tools/deployment/developer/ceph/050-mariadb.sh
+    $ ./tools/deployment/developer/ceph/060-rabbitmq.sh
+    $ ./tools/deployment/developer/ceph/070-memcached.sh
+    $ ./tools/deployment/developer/ceph/080-keystone.sh
+    $ ./tools/deployment/developer/ceph/090-heat.sh
+    $ ./tools/deployment/developer/ceph/100-horizon.sh
+    $ ./tools/deployment/developer/ceph/110-ceph-radosgateway.sh
+    $ ./tools/deployment/developer/ceph/120-glance.sh
+    $ ./tools/deployment/developer/ceph/130-cinder.sh
+    $ ./tools/deployment/developer/ceph/140-openvswitch.sh
+    $ ./tools/deployment/developer/ceph/150-libvirt.sh
+    $ ./tools/deployment/developer/ceph/160-compute-kit.sh
+    $ ./tools/deployment/developer/ceph/170-setup-gateway.sh
+    $ ./tools/deployment/developer/ceph/900-use-it.sh
 
-### Deploy infra components for OpenStack
-    $ cd /opt/vancouver-workshop
-    $ ./20-infra/22-ingress.sh
-    $ ./20-infra/23-ceph.sh
-    $ ./20-infra/24-ceph-ns-activate.sh
-    $ ./20-infra/25-mariadb.sh
-    $ ./20-infra/26-rabbitmq.sh
-    $ ./20-infra/27-memcached.sh
-    
-### Deploy OpenStack
-    $ ./30-newton-deploy/31-keystone.sh
-    $ ./30-newton-deploy/32-ceph-radosgateway.sh
-    $ ./30-newton-deploy/33-glance.sh
-    $ ./30-newton-deploy/34-cinder.sh
-    $ ./30-newton-deploy/35-openvswitch.sh
-    $ ./30-newton-deploy/36-libvirt.sh
-    $ ./30-newton-deploy/37-compute-kit.sh
-    $ ./30-newton-deploy/38-heat.sh
-    $ ./30-newton-deploy/39-horizon.sh
-
-### Initialize OpenStack and Launch an instance (Virtual Machine)
-    $ ./90-common/800-setup-gateway.sh
-    $ ./90-common/900-use-it.sh
+### Exercise the Cloud
+    $ ./tools/deployment/developer/ceph/900-use-it.sh
 
 First, populate environment variables with the location of the Identity service and the admin project and user credentials. This script also creates all the necessary resources to launch an instances and access it.
 
@@ -67,6 +65,7 @@ First, populate environment variables with the location of the Identity service 
 * Add public ip to vm
 
 ### Deploy Monitoring - Prometheus
+    $ cd /opt/vancouver-workshop
     $ ./40-prometheus/41-lma-nfs-provisioner.sh
     $ ./40-prometheus/42-prometheus.sh
     $ ./40-prometheus/43-node-exporter.sh
@@ -74,6 +73,7 @@ First, populate environment variables with the location of the Identity service 
     $ ./40-prometheus/45-grafana.sh
 
 ### Upgrade Openstack - Ocata release
+    $ cd /opt/vancouver-workshop
     $ ./50-ocata-upgrade/51-keystone.sh
     $ ./50-ocata-upgrade/52-glance.sh
     $ ./50-ocata-upgrade/53-cinder.sh
