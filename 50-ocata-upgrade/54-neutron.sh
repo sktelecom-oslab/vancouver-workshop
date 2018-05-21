@@ -21,8 +21,10 @@ done
 set -xe
 
 WORK_DIR=/opt/openstack-helm
+VALUES_DIR=/opt/vancouver-workshop/50-ocata-upgrade/override-files
+
 helm upgrade neutron ${WORK_DIR}/neutron \
-    -f ./override-files/neutron-ocata.yaml
+    -f ${VALUES_DIR}/neutron-ocata.yaml
 
 #NOTE: Wait for deploy
 bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack

@@ -21,8 +21,10 @@ done
 
 set -xe
 WORK_DIR=/opt/openstack-helm
+VALUES_DIR=/opt/vancouver-workshop/50-ocata-upgrade/override-files
+
 helm upgrade horizon ${WORK_DIR}/horizon \
-    -f ./override-files/horizon-ocata.yaml \
+    -f ${VALUES_DIR}/horizon-ocata.yaml \
     --set network.node_port.enabled=true \
     --set network.node_port.port=31000 \
 

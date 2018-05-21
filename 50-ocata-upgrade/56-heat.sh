@@ -20,8 +20,10 @@ done
 
 set -xe
 WORK_DIR=/opt/openstack-helm
+VALUES_DIR=/opt/vancouver-workshop/50-ocata-upgrade/override-files
+
 helm upgrade heat ${WORK_DIR}/heat \
-    -f ./override-files/heat-ocata.yaml
+    -f ${VALUES_DIR}/heat-ocata.yaml
 
 #NOTE: Wait for deploy
 bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack

@@ -20,14 +20,16 @@ done
 
 set -xe
 WORK_DIR=/opt/openstack-helm
+VALUES_DIR=/opt/vancouver-workshop/50-ocata-upgrade/override-files
+
 if [ "x$(systemd-detect-virt)" == "xnone" ]; then
   echo 'OSH is not being deployed in virtualized environment'
   helm upgrade nova ${WORK_DIR}/nova \
-      -f ./override-files/nova-ocata.yaml
+      -f ${VALUES_DIR}/nova-ocata.yaml
 else
   echo 'OSH is being deployed in virtualized environment, using qemu for nova'
   helm upgrade nova ${WORK_DIR}/nova \
-      -f ./override-files/nova-ocata.yaml \
+      -f ${VALUES_DIR}/nova-ocata.yaml \
       --set conf.nova.libvirt.virt_type=qemu
 fi
 

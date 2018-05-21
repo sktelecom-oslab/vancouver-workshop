@@ -19,8 +19,10 @@ for JOBS in $(kubectl get jobs -n openstack | grep glance | awk '{print $1}'); d
 done
 
 WORK_DIR=/opt/openstack-helm
+VALUES_DIR=/opt/vancouver-workshop/50-ocata-upgrade/override-files
+
 helm upgrade glance ${WORK_DIR}/glance \
-    -f ./override-files/glance-ocata.yaml
+    -f  ${VALUES_DIR}/glance-ocata.yaml
 
 #NOTE: Wait for deploy
 bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
