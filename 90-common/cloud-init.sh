@@ -12,7 +12,7 @@ sudo -H su -c '(cd /opt/openstack-helm; git reset --hard a4fa9b761e2de14df588c1e
 sudo -H su -c 'git clone https://git.openstack.org/openstack/openstack-helm-infra /opt/openstack-helm-infra' ubuntu
 sudo -H su -c '(cd /opt/openstack-helm-infra; git reset --hard 39e1f7f9f38d6e8b704471acca4e30e912417f28)' ubuntu
 
-sudo -H su -c 'cd /opt/openstack-helm; ./tools/deployment/developer/common/000-install-packages.sh; ./tools/deployment/developer/common/000-install-packages.sh; ./tools/deployment/developer/common/010-deploy-k8s.sh; ./tools/deployment/developer/common/020-setup-client.sh' ubuntu
+sudo -H su -c 'cd /opt/openstack-helm; ./tools/deployment/developer/common/000-install-packages.sh; ./tools/deployment/developer/common/010-deploy-k8s.sh; ./tools/deployment/developer/common/020-setup-client.sh' ubuntu
 sudo -H su -c '(cd /opt/openstack-helm; make all pull-all-images)' ubuntu
 sudo -H su -c '(cd /opt/openstack-helm-infra; make all pull-all-images)' ubuntu
 sudo -H su -c '(/opt/vancouver-workshop/90-common/pull-ocata-images.sh)' ubuntu

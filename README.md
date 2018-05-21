@@ -15,19 +15,27 @@ Minimum Hardware (VM) Requirements
 ## Quick Start Guide
 
 ### Download Installation Scripts, openstack-helm & openstack-helm-infra source
-    $ git clone https://github.com/sktelecom-oslab/vancouver-workshop.git
-    $ cd vancouver-workshop
-    $ git clone https://github.com/openstack/openstack-helm.git
-    $ git clone https://github.com/openstack/openstack-helm-infra.git
+    $ sudo chown -R ubuntu: /opt
+    $ git clone https://github.com/sktelecom-oslab/vancouver-workshop.git \
+          /opt/vancouver-workshop
+    $ cd /opt/vancouver-workshop
+    $ git clone https://github.com/openstack/openstack-helm.git \
+         /opt/openstack-helm
+    $ cd /opt/openstack-helm; git reset --hard a4fa9b761e2de14df588c1e37f3693174f15ad36
+    $ git clone https://github.com/openstack/openstack-helm-infra.git \
+         /opt/openstack-helm-infra
+    $ cd /opt/openstack-helm-infra; git reset --hard 39e1f7f9f38d6e8b704471acca4e30e912417f28
 
 ### Initialize environment and install all related packages using
-    $ ./10-kubernetes/11-install-packages.sh
+    $ /opt/openstack-helm/tools/deployment/developer/common/000-install-packages.sh
+
 
 ### Deploy kubernetes cluster at your single machine
-    $ ./10-kubernetes/12-deploy-k8s.sh
+    $ /opt/openstack-helm/tools/deployment/developer/common/010-deploy-k8s.sh
+    $ /opt/openstack-helm/tools/deployment/developer/common/020-setup-client.sh
 
 ### Deploy infra components for OpenStack
-    $ ./20-infra/21-setup-client.sh
+    $ cd /opt/vancouver-workshop/20-infra
     $ ./20-infra/22-ingress.sh
     $ ./20-infra/23-ceph.sh
     $ ./20-infra/24-ceph-ns-activate.sh
