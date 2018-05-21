@@ -90,7 +90,7 @@ First, populate environment variables with the location of the Identity service 
 
 #### Grafana
     http://<HOST_IP>:30902
-    admin / admin
+    admin / password
 
 ## Appendix
 
