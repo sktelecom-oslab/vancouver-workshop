@@ -52,6 +52,7 @@ Minimum Hardware (VM) Requirements
     $ ./tools/deployment/developer/ceph/900-use-it.sh
 
 ### Exercise the Cloud
+    $ cd /opt/openstack-helm
     $ ./tools/deployment/developer/ceph/900-use-it.sh
 
 First, populate environment variables with the location of the Identity service and the admin project and user credentials. This script also creates all the necessary resources to launch an instances and access it.
