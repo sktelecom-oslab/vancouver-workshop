@@ -24,3 +24,5 @@ images:
     nova_spiceproxy: docker.io/openstackhelm/nova:ocata
     nova_spiceproxy_assets: 'docker.io/kolla/ubuntu-source-nova-spicehtml5proxy:3.0.3'
     test: 'docker.io/kolla/ubuntu-source-rally:ocata'
+bootstrap:
+  enabled: false

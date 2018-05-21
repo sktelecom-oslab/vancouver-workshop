@@ -14,3 +14,5 @@ images:
     heat_engine: docker.io/openstackhelm/heat:ocata
     heat_engine_cleaner: docker.io/openstackhelm/heat:ocata
     dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+bootstrap:
+  enabled: false

@@ -18,3 +18,16 @@ images:
     cinder_backup_storage_init: docker.io/port/ceph-config-helper:v1.10.2
     dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
     image_repo_sync: docker.io/docker:17.07.0
+bootstrap:
+  enabled: false
+conf:
+  ceph:
+    pools:
+      backup:
+        replication: 1
+        crush_rule: same_host
+        chunk_size: 8
+      volume:
+        replication: 1
+        crush_rule: same_host
+        chunk_size: 8
