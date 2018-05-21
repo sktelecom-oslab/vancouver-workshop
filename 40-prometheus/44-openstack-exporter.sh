@@ -16,11 +16,12 @@
 
 set -xe
 
-
 WORK_DIR=/opt/openstack-helm-infra
+VALUES_DIR=/opt/vancouver-workshop/40-prometheus/override-files
 #NOTE: Deploy command
 helm upgrade --install prometheus-openstack-exporter \
     ${WORK_DIR}/prometheus-openstack-exporter \
+    --values=${VALUES_DIR}/openstack-exporter.yaml \
     --namespace=openstack
 
 #NOTE: Wait for deploy

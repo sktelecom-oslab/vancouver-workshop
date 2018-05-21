@@ -17,9 +17,10 @@
 set -xe
 
 WORK_DIR=/opt/openstack-helm-infra
+VALUES_DIR=/opt/vancouver-workshop/40-prometheus/override-files
 helm upgrade --install lma-nfs-provisioner \
     ${WORK_DIR}/nfs-provisioner --namespace=openstack \
-    --values=./override-files/lma-nfs-provisioner.yaml
+    --values=${VALUES_DIR}/lma-nfs-provisioner.yaml
 
 #NOTE: Wait for deployment
 bash /opt/vancouver-workshop/90-common/wait-for-pods.sh openstack
