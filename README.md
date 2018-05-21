@@ -18,7 +18,6 @@ Minimum Hardware (VM) Requirements
     $ sudo chown -R ubuntu: /opt
     $ git clone https://github.com/sktelecom-oslab/vancouver-workshop.git \
           /opt/vancouver-workshop
-    $ cd /opt/vancouver-workshop
     $ git clone https://github.com/openstack/openstack-helm.git \
          /opt/openstack-helm
     $ cd /opt/openstack-helm; git reset --hard a4fa9b761e2de14df588c1e37f3693174f15ad36
@@ -28,7 +27,6 @@ Minimum Hardware (VM) Requirements
 
 ### Initialize environment and install all related packages using
     $ /opt/openstack-helm/tools/deployment/developer/common/000-install-packages.sh
-
 
 ### Deploy kubernetes cluster at your single machine
     $ /opt/openstack-helm/tools/deployment/developer/common/010-deploy-k8s.sh
