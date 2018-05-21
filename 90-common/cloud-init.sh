@@ -16,3 +16,4 @@ sudo -H su -c 'cd /opt/openstack-helm; ./tools/deployment/developer/common/000-i
 sudo -H su -c '(cd /opt/openstack-helm; make all pull-all-images)' ubuntu
 sudo -H su -c '(cd /opt/openstack-helm-infra; make all pull-all-images)' ubuntu
 sudo -H su -c '(/opt/vancouver-workshop/90-common/pull-ocata-images.sh)' ubuntu
+sudo -H su -c '(touch /home/ubuntu/cloud-init-done)' ubuntu
