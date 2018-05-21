@@ -49,7 +49,6 @@ Minimum Hardware (VM) Requirements
     $ ./tools/deployment/developer/ceph/150-libvirt.sh
     $ ./tools/deployment/developer/ceph/160-compute-kit.sh
     $ ./tools/deployment/developer/ceph/170-setup-gateway.sh
-    $ ./tools/deployment/developer/ceph/900-use-it.sh
 
 ### Exercise the Cloud
     $ cd /opt/openstack-helm
