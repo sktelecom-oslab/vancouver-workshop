@@ -33,7 +33,8 @@ Minimum Hardware (VM) Requirements
     $ /opt/openstack-helm/tools/deployment/developer/common/020-setup-client.sh
 
 ### Deploy infra components for OpenStack
-    $ cd /opt/vancouver-workshop/20-infra
+    $ cd /opt/vancouver-workshop
+    $ ./20-infra/21-setup-client.sh
     $ ./20-infra/22-ingress.sh
     $ ./20-infra/23-ceph.sh
     $ ./20-infra/24-ceph-ns-activate.sh
